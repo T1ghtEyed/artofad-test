@@ -141,7 +141,7 @@ $(document).ready(function() {
           return endDate.format('MM/DD/YYYY h:mm:ss');
         }
       },
-			description: {                                      // Поле ввода "Описание"
+      description: {                                      // Поле ввода "Описание"
         required: function() {                            // Обязательно к заполнению, если раскрыто
           return !$('#description').hasClass('hidden');
         },
@@ -156,8 +156,8 @@ $(document).ready(function() {
     },
 
     // Сообщения при несоответствии требованиям
-		messages: {
-			name: "Не короче 5 символов",
+    messages: {
+      name: "Не короче 5 символов",
       dateStart: "Дата и время начала проведения промоакции не ранее текущей даты",
       dateEnd: "Дата и время окончания проведения промоакции не ранее даты и времени начала + 3 часа",
       dateRegistration: {
