@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArtofAd test</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+</head>
+<body>
+  <div class="container">
+	<br>
+    <div class="row">
+			<div class="col-xs-12">
+				<!--Tabs nav-->
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active"><a data-toggle="tab" href="#main">Основное</a></li>
+					<li role="presentation" class="hidden" id="extra-tab"><a data-toggle="tab" href="#extra">Бонусные купоны</a></li>
+				</ul>
+
+				<br>
+
+				<!--Tabs-->
+				<form class="form-horizontal" action="" id="form-main">
+					<div class="tab-content">
+
+						<!--Main tab-->
+						<div id="main" class="tab-pane fade in active">
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="name">Название</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" id="name" name="name" placeholder="Название">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="date-start">Дата начала</label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="date-start">
+										<input class="form-control" type="text" name="dateStart">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="date-end">Дата окончания</label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="date-end">
+										<input class="form-control" type="text" name="dateEnd">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="date-registration">Дата начала регистрации участников</label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="date-registration">
+										<input class="form-control" type="text" name="dateRegistration">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="type">Тип промоакции</label>
+								<div class="col-sm-3">
+									<select class="form-control" name="type" id="type">
+										<option value="0">Бонусные купоны</option>
+										<option value="1">Рекламная акция</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group hidden" id="description">
+								<label class="control-label col-sm-3" for="description">Описание</label>
+								<div class="col-sm-3">
+									<textarea class="form-control" name="description" id="description"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!--Extra tab-->
+						<div id="extra" class="tab-pane fade">
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="cost">Стоимость одного купона</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="cost" id="cost">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="settings">Расширенные настройки</label>
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<label><input type="checkbox" name="settings" id="settings"></label>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group hidden" id="partic-group">
+								<label class="control-label col-sm-3" for="participant">Регистрация участников</label>
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<label><input type="checkbox" name="participant" id="participant"></label>	
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group hidden" id="stock-group">
+								<label class="control-label col-sm-3" for="stock">Досрочное завершение акции</label>
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<label><input type="checkbox" name="stock" id="stock"></label>	
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group hidden" id="privilege-group">
+								<label class="control-label col-sm-3" for="workers">Право на досрочное завершение</label>
+								<div class="col-sm-3">
+									<select class="form-control" name="workers" id="workers" multiple>
+										<option value="">Кассир</option>
+										<option value="">Менеджер</option>
+										<option value="">Администратор</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Validate button-->
+					<div class="col-sm-offset-2 col-sm-2">
+						<button type="submit" class="btn btn-success btn-block" id="validate">Валидировать</button>
+					</div>
+
+				</form>		
+			</div>
+    </div>
+  </div>
+
+  <!-- =================== SCRIPT =================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<!--Локализованная версия bootstrap-datetimepicker-->
+	<!--версия устарела, использование ведет к deprecation warning-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/2.1.30/js/locales/bootstrap-datetimepicker.ru.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+  <script src="index.js"></script>
+</body>
+</html>
