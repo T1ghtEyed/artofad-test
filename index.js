@@ -68,7 +68,7 @@ $(document).ready(function() {
   //=========================EVENTS============================
   
   // При нажатии на выпадающий список
-  select.on('click', function() {
+  select.on('click', () => {
     if (select.val() == 1) {                      // Тип промоакции: Рекламная акция
       $('#extra-tab').addClass('hidden');         // Скрыть вкладку "Бонусные купоны"
       $('#description').removeClass('hidden');    // Проявить поле "Описание"
@@ -82,25 +82,25 @@ $(document).ready(function() {
 
   // При изменении пользователем даты в поле даты начала
   // записывает выбранное значение в startDate
-  $('#date-start').on('dp.change', function(e) {
+  $('#date-start').on('dp.change', e => {
     startDate = e.date;
   });
 
   // При изменении пользователем даты в поле даты окончания
   // записывает выбранное значение в endDate
-  $('#date-end').on('dp.change', function(e) {
+  $('#date-end').on('dp.change', e => {
     endDate = e.date;
   });
 
   // При изменнении пользователем даты в поле даты окончания регистрации
   // записвает выбранное значение в registrarionDate
-  $('#date-registration').on('dp.change', function(e) {
+  $('#date-registration').on('dp.change', e => {
     registrationDate = e.date;
   });
   
   // Скрывает и раскрывает дополнительные настройки при
   // нажатии на checkbox #settigs (Дополнительные настройки)
-  $('#settings').on('change', function() {
+  $('#settings').on('change', () => {
     $('#partic-group').toggleClass('hidden');       // Чекбокс "Регистрация участников"
     $('#stock-group').toggleClass('hidden');        // Чекбокс "Досрочное завершение акции"
     $('#privilege-group').toggleClass('hidden');    // Чекбокс "Право на досрочное завершение"
@@ -126,7 +126,7 @@ $(document).ready(function() {
       },
       dateEnd: {                                          // Поле ввода "Дата окончания"
         required: true,                                   // Обязательно к заполнению
-        min: function() {                                 // Минимальное значение - дата и время начала
+        min: () => {                                 // Минимальное значение - дата и время начала
           return startDate
             .add(3, 'hours')                              // + 3часа
             .format('MM/DD/YYYY h:mm:ss');
@@ -134,21 +134,21 @@ $(document).ready(function() {
       },
       dateRegistration: {                                 // Поле ввода "Дата окончания регистрации"
         required: true,                                   // Обязательно к заполнению
-        min: function() {                                 // Минимальное значение - дата и время начала
+        min: () => {                                 // Минимальное значение - дата и время начала
           return startDate.format('MM/DD/YYYY h:mm:ss');
         },
-        max: function() {                                 // Максимальное значение - дата и время окончания
+        max: () => {                                 // Максимальное значение - дата и время окончания
           return endDate.format('MM/DD/YYYY h:mm:ss');
         }
       },
       description: {                                      // Поле ввода "Описание"
-        required: function() {                            // Обязательно к заполнению, если раскрыто
+        required: () => {                            // Обязательно к заполнению, если раскрыто
           return !$('#description').hasClass('hidden');
         },
         minlength: 20                                     // Минимальная длина - 20
       },
       cost: {                                             // Поле ввода "Стоимость одного купона"
-        required: function() {                            // Обязательно к заполнению при наличии
+        required: () => {                            // Обязательно к заполнению при наличии
           return !$('#extra-tab').hasClass('hidden');     // вкладки "Бонусные купоны"
         },
         digits: true                                      // Только целые неотрицательные числа
@@ -173,7 +173,7 @@ $(document).ready(function() {
     errorElement: "em",
 
     // Сообщения о несоответствии помещаются в DOM по следующим правилам
-    errorPlacement: function(error, element) {
+    errorPlacement: (error, element) => {
       error.addClass('help-block');
       if (element.parent().hasClass("date")){       // Если это поле выбора даты
         error.insertAfter(element.parent());        // сообщения помещаются в div.col-sm-3
