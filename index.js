@@ -35,7 +35,7 @@ $(document).ready(function() {
   let registrationDate = defaultRegistrationDate;    // Текущая дата окончания регистрации
 
   // Инициализируем DateTimePicker в элементе input #date-start
-  $('#date-start').datetimepicker({
+  $("#date-start").datetimepicker({
     // Устанавливаем значение в поле по умолчанию
     defaultDate: defaultStartDate,
     // Поделючаем локализацию
@@ -44,7 +44,7 @@ $(document).ready(function() {
   });
 
   //  Инициализируем DateTimePicker в элементе input #date-end
-  $('#date-end').datetimepicker({
+  $("#date-end").datetimepicker({
     defaultDate: defaultEndDate,
     // Поделючаем локализацию
     // Файл локализации устарел, использование не рекомендуется
@@ -52,7 +52,7 @@ $(document).ready(function() {
   });
 
   //  Инициализируем DateTimePicker в элементе input #date-registration
-  $('#date-registration').datetimepicker({
+  $("#date-registration").datetimepicker({
     defaultDate: defaultRegistrationDate,
     // Поделючаем локализацию
     // Файл локализации устарел, использование не рекомендуется
@@ -60,7 +60,7 @@ $(document).ready(function() {
   });
   
   // Элемент select #type на вкладке "Основное"
-  const select = $('#type');
+  const select = $("#type");
   
   // Отчищаем select до выбора элемента списка
   select.prop("selectedIndex", -1);
@@ -68,42 +68,42 @@ $(document).ready(function() {
   //=========================EVENTS============================
   
   // При нажатии на выпадающий список
-  select.on('click', () => {
+  select.on("click", () => {
     if (select.val() == 1) {                      // Тип промоакции: Рекламная акция
-      $('#extra-tab').addClass('hidden');         // Скрыть вкладку "Бонусные купоны"
-      $('#description').removeClass('hidden');    // Проявить поле "Описание"
+      $("#extra-tab").addClass("hidden");         // Скрыть вкладку "Бонусные купоны"
+      $("#description").removeClass("hidden");    // Проявить поле "Описание"
     }
     
     if (select.val() == 0) {                       // Тип промоакции: Бонусные купоны
-      $('#description').addClass('hidden');        // Cкрыть поле "Опаисание"
-      $('#extra-tab').removeClass('hidden');       // Проявить вкладку "Бонусные купоны"
+      $("#description").addClass("hidden");        // Cкрыть поле "Опаисание"
+      $("#extra-tab").removeClass("hidden");       // Проявить вкладку "Бонусные купоны"
     }
   });
 
   // При изменении пользователем даты в поле даты начала
   // записывает выбранное значение в startDate
-  $('#date-start').on('dp.change', e => {
+  $("#date-start").on("dp.change", e => {
     startDate = e.date;
   });
 
   // При изменении пользователем даты в поле даты окончания
   // записывает выбранное значение в endDate
-  $('#date-end').on('dp.change', e => {
+  $("#date-end").on("dp.change", e => {
     endDate = e.date;
   });
 
   // При изменнении пользователем даты в поле даты окончания регистрации
   // записвает выбранное значение в registrarionDate
-  $('#date-registration').on('dp.change', e => {
+  $("#date-registration").on("dp.change", e => {
     registrationDate = e.date;
   });
   
   // Скрывает и раскрывает дополнительные настройки при
   // нажатии на checkbox #settigs (Дополнительные настройки)
-  $('#settings').on('change', () => {
-    $('#partic-group').toggleClass('hidden');       // Чекбокс "Регистрация участников"
-    $('#stock-group').toggleClass('hidden');        // Чекбокс "Досрочное завершение акции"
-    $('#privilege-group').toggleClass('hidden');    // Чекбокс "Право на досрочное завершение"
+  $("#settings").on("change", () => {
+    $("#partic-group").toggleClass("hidden");       // Чекбокс "Регистрация участников"
+    $("#stock-group").toggleClass("hidden");        // Чекбокс "Досрочное завершение акции"
+    $("#privilege-group").toggleClass("hidden");    // Чекбокс "Право на досрочное завершение"
   });
   
 //=======================JQuery Validator============================
@@ -113,7 +113,7 @@ $(document).ready(function() {
   // В данном случае при нажатии на кнопку #validate c типом submit
   // Форматирование (.firmat(...)) производится для корректного сравнения
   // значения в поле с требуемым
-  $('#form-main').validate({
+  $("#form-main").validate({
     // Набор правил для полей ввода
     rules: {
       name: {                                             // Поле ввода "Название"
@@ -126,7 +126,7 @@ $(document).ready(function() {
       },
       dateEnd: {                                          // Поле ввода "Дата окончания"
         required: true,                                   // Обязательно к заполнению
-        min: () => {                                 // Минимальное значение - дата и время начала
+        min: () => {                                      // Минимальное значение - дата и время начала
           return startDate
             .add(3, 'hours')                              // + 3часа
             .format('MM/DD/YYYY h:mm:ss');
@@ -134,22 +134,22 @@ $(document).ready(function() {
       },
       dateRegistration: {                                 // Поле ввода "Дата окончания регистрации"
         required: true,                                   // Обязательно к заполнению
-        min: () => {                                 // Минимальное значение - дата и время начала
+        min: () => {                                      // Минимальное значение - дата и время начала
           return startDate.format('MM/DD/YYYY h:mm:ss');
         },
-        max: () => {                                 // Максимальное значение - дата и время окончания
+        max: () => {                                      // Максимальное значение - дата и время окончания
           return endDate.format('MM/DD/YYYY h:mm:ss');
         }
       },
       description: {                                      // Поле ввода "Описание"
-        required: () => {                            // Обязательно к заполнению, если раскрыто
-          return !$('#description').hasClass('hidden');
+        required: () => {                                 // Обязательно к заполнению, если раскрыто
+          return !$("#description").hasClass("hidden");
         },
         minlength: 20                                     // Минимальная длина - 20
       },
       cost: {                                             // Поле ввода "Стоимость одного купона"
-        required: () => {                            // Обязательно к заполнению при наличии
-          return !$('#extra-tab').hasClass('hidden');     // вкладки "Бонусные купоны"
+        required: () => {                                 // Обязательно к заполнению при наличии
+          return !$("#extra-tab").hasClass("hidden");     // вкладки "Бонусные купоны"
         },
         digits: true                                      // Только целые неотрицательные числа
       }
@@ -174,12 +174,28 @@ $(document).ready(function() {
 
     // Сообщения о несоответствии помещаются в DOM по следующим правилам
     errorPlacement: (error, element) => {
-      error.addClass('help-block');
+      error.addClass("help-block");
       if (element.parent().hasClass("date")){       // Если это поле выбора даты
         error.insertAfter(element.parent());        // сообщения помещаются в div.col-sm-3
       } else {                                      // иначе
         error.insertAfter(element);                 // после input элемента
       }
+    },
+
+    //Подсветка сообщения об ошибке
+    highlight: (element, errorClass, validClass) => {
+      $(element)
+        .parents(".col-sm-3")
+        .addClass("has-error")
+        .removeClass("has-success");
+    },
+
+    //Подсветка заполненного поля о соответствии требованиям
+    unhighlight: (element, errorClass, validClass) => {
+      $(element)
+        .parents(".col-sm-3")
+        .addClass("has-success")
+        .removeClass("has-error");
     }
   });
 
